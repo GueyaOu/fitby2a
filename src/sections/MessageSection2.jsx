@@ -16,7 +16,7 @@ const MessageSection2 = () => {
     });
 
     gsap.to(firstMsgSplit.words, {
-      color: "#ffffff",
+      color: "#003d7a",
       ease: "power1.in",
       stagger: 1,
       scrollTrigger: {
@@ -27,7 +27,7 @@ const MessageSection2 = () => {
       },
     });
     gsap.to(secMsgSplit.words, {
-      color: "#ffffff",
+      color: "#003d7a",
       ease: "power1.in",
       stagger: 1,
       scrollTrigger: {
@@ -67,11 +67,11 @@ const MessageSection2 = () => {
   });
 
   return (
-    <section className="message-content message-content2" style={{backgroundColor: '#0a0a0a', color: '#ffffff'}}>
+    <section className="message-content message-content2 md:mt-[400vh] mt-[50vh]">
       <div className="container mx-auto flex-center py-28 relative">
         <div className="w-full h-full">
           <div className="msg-wrapper">
-            <h1 className="first-message2">En tant que spécialiste dans le </h1>
+            <h1 className="first-message2">Excellence dans le recrutement</h1>
 
             <div
               style={{
@@ -79,22 +79,21 @@ const MessageSection2 = () => {
               }}
               className="msg-text-scroll2"
             >
-              <div className="md:pb-5 pb-3 px-5" style={{background: 'linear-gradient(135deg, #003d7a, #002a5c, #001f47)'}}>
-                <h2 style={{color: '#ffffff'}}>Le recrutement</h2>
+              <div className="md:pb-5 pb-3 px-5">
+                <h2>pour les professionnels</h2>
               </div>
             </div>
 
             <h1 className="second-message2">
-            pour votre établissement aquatique, notre engagement se manifeste par la création de partenariats durables. Forts d'un réseau spécialisé, nous mettons un point d'honneur à vous offrir des professionnels hautement qualifiés.
-            soigneusement sélectionnés pour répondre aux besoins spécifiques de chacun de nos client. Notre approche stratégique vise à garantir non seulement la compétence technique de nos recrues, mais aussi une adéquation parfaite avec la culture
+            des installations aquatiques.
             </h1>
           </div>
 
           <div className="flex-center md:mt-20 mt-10">
             <div className="max-w-md px-10 flex-center overflow-hidden">
               <p>
-              et les valeurs de votre établissement,
-               assurant ainsi une contribution positive et une expérience exceptionnelle que vous offrez à vos membres.
+              Notre expertise garantit des candidats qualifiés,
+              parfaitement adaptés à vos besoins spécifiques.
               </p>
             </div>
           </div>

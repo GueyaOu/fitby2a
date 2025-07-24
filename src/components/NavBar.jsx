@@ -74,34 +74,34 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar fixed top-0 left-0 w-full z-50 px-6 md:px-10 py-4 transition-all duration-300">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
+      <nav className="navbar fixed top-0 left-0 w-full z-50 px-6 md:px-8 py-3 transition-all duration-300">
+        <div className="flex justify-between items-center max-w-6xl mx-auto">
           {/* Logo */}
           <div className="nav-logo">
             <Link to="/">
               <img 
                 src="/logo-new.png" 
                 alt="FIT BY M2A" 
-                className="md:w-20 w-16 cursor-pointer hover:scale-110 transition-transform duration-300" 
+                className="md:w-12 w-10 cursor-pointer hover:scale-110 transition-transform duration-300" 
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <ul className="nav-links hidden md:flex items-center space-x-8">
+          <ul className="nav-links hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
               <li key={index}>
                 <Link 
                   to={item.href}
-                  className="text-white font-semibold text-lg hover:text-blue-300 transition-colors duration-300 relative group"
+                  className="text-white font-medium text-sm tracking-wide hover:text-blue-300 transition-colors duration-300 relative group py-2"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-300 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-0 left-0 w-0 h-0.5 bg-blue-300 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </li>
             ))}
             <li>
-              <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105">
+              <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg font-medium text-sm hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 ml-2">
                 Réserver
               </button>
             </li>

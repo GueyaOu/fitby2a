@@ -8,6 +8,11 @@ const VideoPinSection = () => {
   });
 
   useGSAP(() => {
+    // Set initial clip-path for both mobile and desktop
+    gsap.set(".video-box", {
+      clipPath: "circle(6% at 50% 50%)"
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".vd-pin-section",
@@ -36,7 +41,7 @@ const VideoPinSection = () => {
         toggleActions: "play none none reverse",
       },
     });
-  });
+  }, []);
 
   return (
     <section className="vd-pin-section" style={{ width: '100%', height: '80vh', position: 'relative', overflow: 'hidden' }}>
@@ -45,8 +50,7 @@ const VideoPinSection = () => {
         style={{ 
           width: '100%', 
           height: '100%', 
-          position: 'relative',
-          clipPath: isMobile ? "circle(100% at 50% 50%)" : "circle(6% at 50% 50%)"
+          position: 'relative'
         }}
       >
         {isMobile ? (
