@@ -65,7 +65,7 @@ const HeroSection = () => {
     <section className="bg-main-bg">
       <div className="hero-container">
         <video
-          src="https://dp1evllw0n.ufs.sh/f/d4qmMa0BprfjwGkk3Imi3GSsyQ4Y7kBe0Fj9govIlCrE2PfU"
+          src="/bc-hero.mp4"
           autoPlay
           muted
           playsInline

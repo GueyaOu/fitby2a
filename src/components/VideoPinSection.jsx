@@ -8,35 +8,78 @@ const VideoPinSection = () => {
   });
 
   useGSAP(() => {
-    if (!isMobile) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".vd-pin-section",
-          start: "-15% top",
-          end: "200% top",
-          scrub: 1.5,
-          pin: true,
-        },
-      });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".vd-pin-section",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1.2,
+        pin: false,
+      },
+    });
 
-      tl.to(".video-box", {
-        clipPath: "circle(100% at 50% 50%)",
-        ease: "power1.inOut",
-      });
-    }
+    tl.to(".video-box", {
+      clipPath: "circle(100% at 50% 50%)",
+      ease: "power2.inOut",
+      duration: 1,
+    });
+
+    // Animate play button
+    gsap.from(".play-btn", {
+      scale: 0,
+      opacity: 0,
+      duration: 1,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: ".vd-pin-section",
+        start: "top 60%",
+        toggleActions: "play none none reverse",
+      },
+    });
   });
 
   return (
-    <section className="vd-pin-section">
-      <div
-        style={{
-          clipPath: isMobile
-            ? "circle(100% at 50% 50%)"
-            : "circle(6% at 50% 50%)",
+    <section className="vd-pin-section" style={{ width: '100%', height: '80vh', position: 'relative', overflow: 'hidden' }}>
+      <div 
+        className="video-box"
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          position: 'relative',
+          clipPath: isMobile ? "circle(100% at 50% 50%)" : "circle(6% at 50% 50%)"
         }}
-        className="size-full video-box"
       >
-        <video src="/videos/pin-video.mp4" playsInline muted loop autoPlay />
+        {isMobile ? (
+          <video 
+            src="/istockphoto-2158341185-640_adpp_is.mp4" 
+            playsInline 
+            muted 
+            loop 
+            autoPlay
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}
+          />
+        ) : (
+          <iframe
+            src="https://www.youtube.com/embed/WAiQ1JJ2qb4?autoplay=1&mute=1&loop=1&playlist=WAiQ1JJ2qb4&controls=0&showinfo=0&rel=0"
+            title="FitByM2A Video"
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              border: 'none'
+            }}
+            allow="autoplay; encrypted-media"
+          />
+        )}
 
         <div className="abs-center md:scale-100 scale-200">
           <img src="/images/circle-text.svg" alt="" className="spin-circle" />

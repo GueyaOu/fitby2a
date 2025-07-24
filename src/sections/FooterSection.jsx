@@ -1,4 +1,5 @@
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const isMobile = useMediaQuery({
@@ -59,18 +60,23 @@ const FooterSection = () => {
                 <div>
                   <p className="font-semibold text-white">Email</p>
                   <p className="hover:text-blue-400 transition-colors cursor-pointer">
-                    contact@fitbym2a.com
+                    fitbym2a@gmail.com
                   </p>
                 </div>
                 <div>
                   <p className="font-semibold text-white">Téléphone</p>
                   <p className="hover:text-blue-400 transition-colors cursor-pointer">
-                    +33 (0)1 XX XX XX XX
+                    07 88 25 54 17 / 06 67 46 80 82
                   </p>
                 </div>
                 <div>
                   <p className="font-semibold text-white">Adresse</p>
                   <p>Paris, France</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Horaires</p>
+                  <p>Lun-Ven : 8h-20h</p>
+                  <p>Sam : 9h-19h</p>
                 </div>
               </div>
             </div>
@@ -119,9 +125,22 @@ const FooterSection = () => {
         {/* Copyright */}
         <div className="copyright-box border-t border-gray-700 pt-8">
           <p>Copyright © 2025 FitByM2A - Tous droits réservés</p>
-          <div className="flex items-center gap-7">
-            <p className="hover:text-blue-400 transition-colors cursor-pointer">Politique de Confidentialité</p>
-            <p className="hover:text-blue-400 transition-colors cursor-pointer">Conditions d'Utilisation</p>
+          <div className="flex items-center gap-7 flex-wrap">
+            <Link to="/conditions-generales-vente" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Conditions Générales de Vente
+            </Link>
+            <Link to="/politique-confidentialite" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Politique de Confidentialité
+            </Link>
+            <Link to="/mentions-legales" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Mentions Légales
+            </Link>
+            <Link to="/gestion-cookies" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Gestion des Cookies
+            </Link>
+            <Link to="/donnees-personnelles" className="hover:text-blue-400 transition-colors cursor-pointer">
+              Données Personnelles
+            </Link>
           </div>
         </div>
       </div>

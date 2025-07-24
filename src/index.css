@@ -32,12 +32,39 @@ body {
   font-family: "Antonio", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+/* Hide scrollbar only for home page with ScrollSmoother */
+body.scroll-smooth {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
 
-body::-webkit-scrollbar {
+body.scroll-smooth::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
+}
+
+/* Show scrollbar for other pages */
+body:not(.scroll-smooth) {
+  scrollbar-width: thin;
+  scrollbar-color: #003d7a #f8f9fa;
+}
+
+body:not(.scroll-smooth)::-webkit-scrollbar {
+  width: 8px;
+}
+
+body:not(.scroll-smooth)::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+body:not(.scroll-smooth)::-webkit-scrollbar-thumb {
+  background: #003d7a;
+  border-radius: 4px;
+}
+
+body:not(.scroll-smooth)::-webkit-scrollbar-thumb:hover {
+  background: #002a5c;
 }
 
 @layer utilities {
@@ -65,7 +92,7 @@ body::-webkit-scrollbar {
     background-color: #f8f9fa;
 
     .hero-content {
-      @apply relative z-10 w-full h-full flex flex-col 2xl:justify-center items-center translate-y-10 2xl:pt-0 md:pt-32 pt-24;
+      @apply relative z-10 w-full h-full flex flex-col 2xl:justify-center items-center translate-y-10 2xl:pt-0 md:pt-32 pt-40;
 
       .hero-title {
         @apply text-white 2xl:text-[8.5rem] md:text-[6.5rem] text-[3.3rem] font-bold uppercase leading-[9vw] tracking-[-.35vw] 2xl:mb-0 mb-5;
@@ -265,18 +292,28 @@ body::-webkit-scrollbar {
     }
 
     .vd-pin-section {
-      @apply md:h-[110vh] h-dvh overflow-hidden md:!-translate-y-[15%] md:mt-0 mt-20;
-
-      video {
-        @apply size-full absolute inset-0 object-cover;
-      }
-
       .play-btn {
-        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[9vw] flex justify-center items-center bg-[#ffffff1a] backdrop-blur-xl rounded-full;
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center bg-[#ffffff1a] backdrop-blur-xl rounded-full cursor-pointer hover:bg-[#ffffff2a] transition-colors;
+        width: min(9vw, 80px);
+        height: min(9vw, 80px);
       }
 
       img:first-of-type {
-        @apply size-[15vw];
+        width: min(15vw, 120px);
+        height: min(15vw, 120px);
+      }
+
+      /* Mobile responsive adjustments */
+      @media (max-width: 768px) {
+        .play-btn {
+          width: 60px;
+          height: 60px;
+        }
+
+        img:first-of-type {
+          width: 80px;
+          height: 80px;
+        }
       }
     }
   }
@@ -336,4 +373,17 @@ body::-webkit-scrollbar {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Navbar Styles */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 }
