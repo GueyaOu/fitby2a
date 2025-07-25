@@ -48,9 +48,12 @@ const LoadingScreen = ({ onLoadComplete }) => {
 
   useEffect(() => {
     const loadResources = async () => {
+      // Check if we're on mobile
+      const isMobile = window.innerWidth <= 768;
+      
       // Simulate loading different resources
       const resources = [
-        // Load images
+        // Load images with timeout fallback for mobile
         () => new Promise(resolve => {
           const images = [
             '/logo-new.png',
@@ -63,32 +66,69 @@ const LoadingScreen = ({ onLoadComplete }) => {
           ];
           
           let loaded = 0;
+          const timeout = setTimeout(() => {
+            // Force resolve after 3 seconds on mobile
+            if (isMobile) {
+              resolve();
+            }
+          }, 3000);
+          
           images.forEach(src => {
             const element = src.endsWith('.mp4') ? document.createElement('video') : document.createElement('img');
-            element.onload = element.oncanplaythrough = () => {
+            
+            const handleLoad = () => {
               loaded++;
-              if (loaded === images.length) resolve();
+              if (loaded === images.length) {
+                clearTimeout(timeout);
+                resolve();
+              }
             };
-            element.onerror = () => {
+            
+            const handleError = () => {
               loaded++;
-              if (loaded === images.length) resolve();
+              if (loaded === images.length) {
+                clearTimeout(timeout);
+                resolve();
+              }
             };
+            
+            element.onload = handleLoad;
+            element.oncanplaythrough = handleLoad;
+            element.onerror = handleError;
+            
+            // Set crossOrigin for better mobile compatibility
+            if (element.tagName === 'IMG') {
+              element.crossOrigin = 'anonymous';
+            }
+            
             element.src = src;
           });
         }),
         
-        // Load fonts and CSS
-        () => new Promise(resolve => setTimeout(resolve, 500)),
+        // Load fonts and CSS (shorter on mobile)
+        () => new Promise(resolve => setTimeout(resolve, isMobile ? 200 : 500)),
         
-        // Initialize GSAP and other libraries
-        () => new Promise(resolve => setTimeout(resolve, 300)),
+        // Initialize GSAP and other libraries (shorter on mobile)
+        () => new Promise(resolve => setTimeout(resolve, isMobile ? 100 : 300)),
         
-        // Additional setup time
-        () => new Promise(resolve => setTimeout(resolve, 200))
+        // Additional setup time (shorter on mobile)
+        () => new Promise(resolve => setTimeout(resolve, isMobile ? 100 : 200))
       ];
 
       let currentProgress = 0;
       const progressIncrement = 100 / resources.length;
+      
+      // Fallback progress updater for mobile
+      let progressInterval;
+      if (isMobile) {
+        progressInterval = setInterval(() => {
+          currentProgress += 2;
+          setProgress(Math.min(currentProgress, 95));
+          if (currentProgress >= 95) {
+            clearInterval(progressInterval);
+          }
+        }, 50);
+      }
 
       for (let i = 0; i < resources.length; i++) {
         try {
@@ -97,18 +137,25 @@ const LoadingScreen = ({ onLoadComplete }) => {
           console.warn('Resource loading failed:', error);
         }
         
-        currentProgress += progressIncrement;
-        setProgress(Math.min(currentProgress, 100));
+        if (!isMobile) {
+          currentProgress += progressIncrement;
+          setProgress(Math.min(currentProgress, 100));
+        }
         
         // Small delay between each step for visual feedback
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, isMobile ? 50 : 100));
+      }
+
+      // Clear fallback interval
+      if (progressInterval) {
+        clearInterval(progressInterval);
       }
 
       // Ensure we reach 100% and wait a moment before completing
       setProgress(100);
       setTimeout(() => {
         setIsComplete(true);
-      }, 500);
+      }, isMobile ? 300 : 500);
     };
 
     loadResources();
