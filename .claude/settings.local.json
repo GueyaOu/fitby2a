@@ -10,7 +10,8 @@
       "Bash(git fetch:*)",
       "WebFetch(domain:github.com)",
       "Bash(git remote add:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": []
   }

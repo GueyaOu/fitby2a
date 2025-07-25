@@ -387,3 +387,39 @@ body:not(.scroll-smooth)::-webkit-scrollbar-thumb:hover {
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -6px);
 }
+
+/* Loading Screen Styles */
+.loading-screen {
+  background: linear-gradient(135deg, #001f47, #002a5c, #003d7a);
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(135deg, #001f47, #002a5c, #003d7a);
+  }
+  50% {
+    background: linear-gradient(135deg, #003d7a, #001f47, #002a5c);
+  }
+}
+
+.loading-dot {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Prevent scroll during loading */
+body.loading {
+  overflow: hidden !important;
+  height: 100vh !important;
+}

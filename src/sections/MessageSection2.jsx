@@ -67,7 +67,7 @@ const MessageSection2 = () => {
   });
 
   return (
-    <section className="message-content message-content2 md:mt-[600vh] mt-[20vh] bg-black text-white">
+    <section className="message-content message-content2 md:mt-[50vh] mt-[20vh] bg-black text-white">
       <div className="container mx-auto flex-center py-28 relative">
         <div className="w-full h-full">
           <div className="msg-wrapper">

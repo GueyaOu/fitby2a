@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLayoutEffect, useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
+import LoadingScreen from "./components/LoadingScreen";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
@@ -21,10 +22,44 @@ const AppContent = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [isReady, setIsReady] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+
+  // Prevent scrolling while loading
+  useEffect(() => {
+    if (isLoading) {
+      document.body.classList.add('loading');
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.classList.remove('loading');
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    }
+    
+    return () => {
+      document.body.classList.remove('loading');
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    };
+  }, [isLoading]);
+
+  // Handle loading completion
+  const handleLoadComplete = () => {
+    setIsLoading(false);
+    setHasLoadedOnce(true);
+  };
 
   // Complete cleanup and reset on route change
   useLayoutEffect(() => {
     setIsReady(false);
+    
+    // Only show loading screen on first visit to homepage
+    if (location.pathname === '/' && !hasLoadedOnce) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
     
     // Comprehensive cleanup
     ScrollTrigger.killAll();
@@ -76,6 +111,11 @@ const AppContent = () => {
       };
     }
   }, [isHomePage, isReady]);
+
+  // Show loading screen only on first homepage visit
+  if (isLoading && location.pathname === '/' && !hasLoadedOnce) {
+    return <LoadingScreen onLoadComplete={handleLoadComplete} />;
+  }
 
   // Don't render content until cleanup is complete
   if (!isReady) {
