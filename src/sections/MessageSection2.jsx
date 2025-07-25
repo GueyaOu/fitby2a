@@ -16,7 +16,7 @@ const MessageSection2 = () => {
     });
 
     gsap.to(firstMsgSplit.words, {
-      color: "#003d7a",
+      color: "#ffffff",
       ease: "power1.in",
       stagger: 1,
       scrollTrigger: {
@@ -27,7 +27,7 @@ const MessageSection2 = () => {
       },
     });
     gsap.to(secMsgSplit.words, {
-      color: "#003d7a",
+      color: "#ffffff",
       ease: "power1.in",
       stagger: 1,
       scrollTrigger: {
@@ -67,7 +67,7 @@ const MessageSection2 = () => {
   });
 
   return (
-    <section className="message-content message-content2 md:mt-[400vh] mt-[50vh]">
+    <section className="message-content message-content2 md:mt-[700vh] mt-[50vh] bg-black text-white">
       <div className="container mx-auto flex-center py-28 relative">
         <div className="w-full h-full">
           <div className="msg-wrapper">
