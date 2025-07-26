@@ -29,18 +29,6 @@ const VideoPinSection = () => {
       duration: 1,
     });
 
-    // Animate play button
-    gsap.from(".play-btn", {
-      scale: 0,
-      opacity: 0,
-      duration: 1,
-      ease: "back.out(1.7)",
-      scrollTrigger: {
-        trigger: ".vd-pin-section",
-        start: "top 60%",
-        toggleActions: "play none none reverse",
-      },
-    });
   }, []);
 
   return (
@@ -87,13 +75,6 @@ const VideoPinSection = () => {
 
         <div className="abs-center md:scale-100 scale-200">
           <img src="/images/circle-text.svg" alt="" className="spin-circle" />
-          <div className="play-btn">
-            <img
-              src="/images/play.svg"
-              alt=""
-              className="size-[3vw] ml-[.5vw]"
-            />
-          </div>
         </div>
       </div>
     </section>
